@@ -4,8 +4,16 @@ const cheerio = require('cheerio');
 const cors = require('cors');
 
 const app = express();
-// Use CORS middleware
-app.use(cors());
+
+const corsOptions = {
+  origin: [
+    '*',
+    'https://gsl-python.azurewebsites.net',
+  ],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 const port = process.env.PORT || 3030;
 app.get('/extract', async (req, res) => {
