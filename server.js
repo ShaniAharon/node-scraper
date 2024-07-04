@@ -1,8 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const cors = require('cors');
 
 const app = express();
+// Use CORS middleware
+app.use(cors());
+
 const port = process.env.PORT || 3030;
 app.get('/extract', async (req, res) => {
   const url = req.query.url;
@@ -28,7 +32,6 @@ app.get('/extract', async (req, res) => {
 
     $('p, span, li').each((i, element) => {
       const text = $(element).text().trim();
-      console.log('text', text)
       if (text.length > 20) {
         textElements.push(text);
       }
